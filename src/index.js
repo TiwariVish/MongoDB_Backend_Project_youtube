@@ -2,7 +2,8 @@
 // import {DB_NAME} from "./constants"
 
 import { app } from "./app.js"
-import connectDB from "./DB/index.js"
+// import connectDB from "./DB/index.js"
+import  connectDB from "./DB/connect.js"
 import dotenv from "dotenv"
 
 
