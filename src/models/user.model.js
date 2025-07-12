@@ -8,7 +8,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true, 
       trim: true,
       index: true,
     },
@@ -16,7 +16,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true, 
       trim: true,
     },
     fullname: {
@@ -26,11 +26,11 @@ const userSchema = new Schema(
       index: true,
     },
     avatar: {
-      type: String, // cloudinary url
-      required: true,
+      type: String, // Cloudinary URL
+      required: false,
     },
     coverImage: {
-      type: String, // cloudinary url
+      type: String, // Cloudinary URL
     },
     watchHistory: [
       {
@@ -67,7 +67,7 @@ userSchema.methods.generateAccessToken = function () {
     {
       _id: this._id,
       email: this.email,
-      username: username,
+      username: this.username, // Fix incorrect reference
       fullname: this.fullname,
     },
     process.env.ACCESS_TOKEN_SECRET,
@@ -77,7 +77,7 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 
-userSchema.methods.generateRrfreshToken = function () {
+userSchema.methods.generateRefreshToken = function () { // Fix method name
   return jwt.sign(
     {
       _id: this._id,
@@ -89,6 +89,3 @@ userSchema.methods.generateRrfreshToken = function () {
   );
 };
 export const User = mongoose.model("User", userSchema);
-
-// Note : JWT is byrear Token  like key
-// any user send this Token i will send the data
