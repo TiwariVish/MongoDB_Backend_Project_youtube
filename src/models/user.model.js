@@ -26,11 +26,11 @@ const userSchema = new Schema(
       index: true,
     },
     avatar: {
-      type: String, // Cloudinary URL
+      type: String, 
       required: false,
     },
     coverImage: {
-      type: String, // Cloudinary URL
+      type: String, 
     },
     watchHistory: [
       {
@@ -46,6 +46,7 @@ const userSchema = new Schema(
     refreshToken: {
       type: String,
     },
+
   },
   {
     timestamps: true,
@@ -67,8 +68,9 @@ userSchema.methods.generateAccessToken = function () {
     {
       _id: this._id,
       email: this.email,
-      username: this.username, // Fix incorrect reference
+      username: this.username, 
       fullname: this.fullname,
+      consumerId:this.consumerId
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -77,7 +79,7 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 
-userSchema.methods.generateRefreshToken = function () { // Fix method name
+userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
